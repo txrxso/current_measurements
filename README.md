@@ -44,3 +44,7 @@ Collect data for combinations of:
 
 ## Wiring Tutorial
 https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring 
+
+
+## Rebuild configuration files 
+`pio project init --ide vscode` 
