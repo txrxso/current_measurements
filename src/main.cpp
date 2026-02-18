@@ -11,6 +11,7 @@ float loadvoltage_V = 0;
 float power_mW = 0;
 
 #define CALIBRATION_MODE 1 
+#define SAMPLING_INTERVAL_MS 1000
 /* 
 1: 32V, 2A 
 2: 32V, 1A 
@@ -51,6 +52,6 @@ void loop() {
     Serial.print("Load Voltage:"); Serial.print(loadvoltage_V); Serial.println(" V");
     Serial.print("Power:"); Serial.print(power_mW); Serial.println(" mW");
 
-    delay(1000);
+    delay(SAMPLING_INTERVAL_MS);
 
 }
