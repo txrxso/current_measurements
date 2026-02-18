@@ -16,9 +16,9 @@ Code for Arduino Uno to get current reading values from INA219 breakout board, a
 4. Gateway, noise, and air quality node
 
 ### 2.2 Scenarios:
-A. Heartbeats only (5 minute intervals)
-B. Heartbeats (5 minute intervals) and 'mock' alerts every 12 minutes (~5 alerts per hour)
-C. Heartbeats (5 minute intervals) and 'mock' alerts every 5 minutes (~12 alerts per hour)
+A. Heartbeats only (5 minute intervals) <br>
+B. Heartbeats (5 minute intervals) and 'mock' alerts every 12 minutes (~5 alerts per hour) <br>
+C. Heartbeats (5 minute intervals) and 'mock' alerts every 5 minutes (~12 alerts per hour) <br>
 
 ### 2.3 Test plan: 
 Collect data for combinations of: 
@@ -27,24 +27,42 @@ Collect data for combinations of:
 | 1 | A | No|
 | 1 | B | No|
 | 1 | C | No|
-| 1 | D | No|
 | 2 | A | No|
 | 2 | B | No|
 | 2 | C | No|
-| 2 | D | No|
 | 3 | A | No|
 | 3 | B | No|
 | 3 | C | No|
-| 3 | D | No|
 | 4 | A | No|
 | 4 | B | No|
 | 4 | C | No|
-| 4 | D | No|
 
 
 ## Wiring Tutorial
 https://learn.adafruit.com/adafruit-ina219-current-sensor-breakout/wiring 
 
 
-## Rebuild configuration files 
+## Usage 
+If required, rebuild configuration files in PlatformIO:
 `pio project init --ide vscode` 
+
+### Setup:
+1. Clone this repository and activate a new virtual env. 
+2. `pip install -r python/requirements.txt`
+
+### Upload the code to Arduino Uno board
+`pio run --target upload`
+
+### Run the Python script 
+1. Configure the following parameters in `python/current_daq.py` depending on the test setup: 
+
+```python
+topology = Topology.GATEWAY_ONLY
+scenario = Scenario.HEARTBEATS_ONLY
+baud = 115200
+port = "COM_3"  
+```
+
+2. Run `python python/current_daq.py`
+
+3. Press Ctrl+C to stop logging.
