@@ -1,3 +1,4 @@
 /python/cm_venv/
 .pio/
 .vscode/
+/python/__pycache__/
