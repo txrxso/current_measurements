@@ -9,6 +9,22 @@ moving_avg_window = 10 # number of samples for moving average
 discard_threshold = 1 # mA thresholds that mean not connected to PWR yet
 
 # ==== SCRIPT ====
+def get_total_mah(df: pd.DataFrame) -> float:
+    """Integrates using trapezoidal rule to get total mAh consumed"""
+    total_mah = 0
+
+    # calculate time difference (dt) b/w each sample
+    df['time_diff'] = df['time_s'].diff().fillna(0)
+    # calculate average current b/w current and prev sample
+    df['avg_current_mA'] = df['current_mA'].rolling(window=2).mean().fillna(df['current_mA'])
+
+    # apply formula to get get step_mah
+    df['step_mah'] = (df['avg_current_mA'] * df['time_diff']) / 3600
+    # sum up for total capacity
+    total_mah = df['step_mah'].sum()
+
+    return total_mah
+
 
 def basic_current_stats(df: pd.DataFrame, total_time: float) -> dict:
     stats = {}
@@ -105,6 +121,7 @@ def run_stats():
     duty_raw = duty_cycle_estimation(df, total_time, "current_mA")
     duty_filtered = duty_cycle_estimation(df, total_time, "current_filtered")
     tx = tx_burst_detection(df)
+    total_mah = get_total_mah(df)
 
     # write out to txt file
     base_name = os.path.splitext(os.path.basename(csv_path))[0]
@@ -112,6 +129,7 @@ def run_stats():
         f.write("=== Basic Current Stats ===\n")
         for k, v in basic.items():
             f.write(f"{k}: {v}\n")
+        f.write(f"total_mah: {total_mah}\n")
 
         f.write("\n=== Duty Cycle Estimation ===\n")
         f.write("\n--- Raw Current ---\n")
