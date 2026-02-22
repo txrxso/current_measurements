@@ -11,7 +11,7 @@ float loadvoltage_V = 0;
 float power_mW = 0;
 
 #define CALIBRATION_MODE 3 
-#define SAMPLING_INTERVAL_MS 1000
+#define SAMPLING_INTERVAL_MS 20
 /* 
 1: 32V, 2A 
 2: 32V, 1A 
