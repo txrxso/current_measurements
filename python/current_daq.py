@@ -29,10 +29,10 @@ class Scenario(Enum):
 
 
 # MANUALLY SET THESE VALUES
-topology = Topology.GATEWAY_ONLY
-scenario = Scenario.HEARTBEATS_ONLY
+topology = Topology.GATEWAY_NOISE
+scenario = Scenario.HEARTBEATS_ONLY # decide later, right now one in 5 readings is an alert 
 baud = 115200
-port = "COM7"          
+port = "COM8"          
 
 def pre_log_checks() -> str: 
     # ensure directories exist (../data/ and ../data/plots/)
@@ -112,7 +112,15 @@ def log_current():
         
         try:
             while True:
-                line = ser.readline().decode("utf-8").strip()
+                try:
+                    line = ser.readline().decode("utf-8", errors='replace').strip()
+                except Exception as e:
+                    print(f"Error reading serial data: {e}")
+                    continue
+                
+                # Skip empty or corrupted lines
+                if not line:
+                    continue
                 
                 # Parse each type of measurement
                 if line.startswith("Current:"):
