@@ -10,7 +10,7 @@ float busvoltage_V=0;
 float loadvoltage_V = 0;
 float power_mW = 0;
 
-#define CALIBRATION_MODE 3 
+#define CALIBRATION_MODE 1
 #define SAMPLING_INTERVAL_MS 20
 /* 
 1: 32V, 2A 

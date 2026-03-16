@@ -3,8 +3,8 @@ import numpy as np
 import os 
 
 # ==== CONFIG ====
-csv_path = "C:\\Users\\teres\\Projects\\current_measurements\\data\\GATEWAY_ONLY_A_2026-02-19_16-41-31_current.csv"
-thresholds = [150, 180, 200, 250] # mA thresholds for TX detection 
+csv_path = r"C:\Users\teres\Projects\current_measurements\data\raw\32V_2A_resolution\GATEWAY_FULL_A_2026-03-15_21-40-00_current.csv"
+thresholds = [250, 300, 350, 400, 500, 550, 600] # mA thresholds for TX detection 
 moving_avg_window = 10 # number of samples for moving average
 discard_threshold = 1 # mA thresholds that mean not connected to PWR yet
 

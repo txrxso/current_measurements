@@ -21,6 +21,9 @@ class Scenario(Enum):
     HEARTBEATS_ONLY = ("A", "Heartbeats only (5m)")
     MOCK_ALERTS_12M = ("B", "Heartbeats (5m) + Mock Alerts (12m)")
     MOCK_ALERTS_5M = ("C", "Heartbeats (5m) + Mock Alerts (5m)")
+    MOCK_ALERTS_3M = ("D", "Heartbeats (5m) + Mock Alerts (3m)")
+    MOCK_ALERTS_30SECS = ("E", "Heartbeats (5m) + Mock Alerts (30s)")
+    MOCK_ALERTS_5SECS = ("F", "Heartbeats (5m) + Mock Alerts (5s)")
 
     def __init__(self, code, description):
         self.code = code
@@ -29,10 +32,10 @@ class Scenario(Enum):
 
 
 # MANUALLY SET THESE VALUES
-topology = Topology.GATEWAY_NOISE
+topology = Topology.GATEWAY_FULL
 scenario = Scenario.HEARTBEATS_ONLY # decide later, right now one in 5 readings is an alert 
 baud = 115200
-port = "COM8"          
+port = "COM7"          
 
 def pre_log_checks() -> str: 
     # ensure directories exist (../data/ and ../data/plots/)
