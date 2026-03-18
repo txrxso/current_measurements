@@ -33,9 +33,10 @@ class Scenario(Enum):
 
 # MANUALLY SET THESE VALUES
 topology = Topology.GATEWAY_FULL
-scenario = Scenario.HEARTBEATS_ONLY # decide later, right now one in 5 readings is an alert 
+scenario = Scenario.MOCK_ALERTS_5M # decide later, right now one in 5 readings is an alert 
 baud = 115200
-port = "COM7"          
+port = "COM7"     
+sampling_interval_ms = 1  # just for filename 
 
 def pre_log_checks() -> str: 
     # ensure directories exist (../data/ and ../data/plots/)
@@ -44,14 +45,27 @@ def pre_log_checks() -> str:
     os.makedirs(test_data_dir, exist_ok=True)
     os.makedirs(plots_dir, exist_ok=True)
 
-    curr_dt = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    out_file = os.path.join(test_data_dir, f"{topology.name}_{scenario.code}_{curr_dt}_current.csv")
+    base_filename = f"{topology.name}_{scenario.code}_{sampling_interval_ms}ms_current.csv"
+    out_file = os.path.join(test_data_dir, base_filename)
 
     # check the scenario and topology values are valid instances of the types 
     if not isinstance(topology, Topology):
         raise ValueError(f"Invalid topology value: {topology}. Must be an instance of Topology enum.")
     if not isinstance(scenario, Scenario):
         raise ValueError(f"Invalid scenario value: {scenario}. Must be an instance of Scenario enum.") 
+
+    # If file exists, append (2), (3), etc. like a file system
+    if os.path.exists(out_file):
+        base_name = os.path.splitext(base_filename)[0]  # Remove extension
+        extension = os.path.splitext(base_filename)[1]  # Get extension
+        counter = 2
+        while True:
+            new_filename = f"{base_name} ({counter}){extension}"
+            out_file = os.path.join(test_data_dir, new_filename)
+            if not os.path.exists(out_file):
+                break
+            counter += 1
+        print(f"File already exists. Using: {new_filename}")
 
     return out_file
 
