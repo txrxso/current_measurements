@@ -1,0 +1,60 @@
+=== Basic Current Stats ===
+total_time_s: 2514.900792
+mean_current_simple_mA: 365.21294206786393
+mean_current_integrated_mA: 365.21788567285216
+mean_power_mW: 380.53685396191247
+min_current_mA: 273.8
+max_current_mA: 632.0
+std_current_mA: 37.876557818336465
+total_mah: 255.13230170368075
+
+=== Duty Cycle Estimation ===
+
+--- Raw Current ---
+Threshold: threshold_250_mA
+  active_time_s: 2514.900792
+  duty_cycle_percent: 100.0
+Threshold: threshold_300_mA
+  active_time_s: 2466.3778159999933
+  duty_cycle_percent: 98.07058090902193
+Threshold: threshold_350_mA
+  active_time_s: 1515.3228859999867
+  duty_cycle_percent: 60.25378380015186
+Threshold: threshold_400_mA
+  active_time_s: 354.63544599999886
+  duty_cycle_percent: 14.101369212181586
+Threshold: threshold_500_mA
+  active_time_s: 0.8377140000003109
+  duty_cycle_percent: 0.03331002171795853
+Threshold: threshold_550_mA
+  active_time_s: 0.3480409999996823
+  duty_cycle_percent: 0.013839154256375228
+Threshold: threshold_600_mA
+  active_time_s: 0.1228990000001815
+  duty_cycle_percent: 0.004886832927610033
+
+--- Filtered Current ---
+Threshold: threshold_250_mA
+  active_time_s: 2514.900792
+  duty_cycle_percent: 100.0
+Threshold: threshold_300_mA
+  active_time_s: 2514.900792
+  duty_cycle_percent: 100.0
+Threshold: threshold_350_mA
+  active_time_s: 1556.7266619999962
+  duty_cycle_percent: 61.90012214207439
+Threshold: threshold_400_mA
+  active_time_s: 171.47136100001396
+  duty_cycle_percent: 6.818215714332398
+Threshold: threshold_500_mA
+  active_time_s: 0.007235000000036962
+  duty_cycle_percent: 0.00028768530444826237
+Threshold: threshold_550_mA
+  active_time_s: 0.0
+  duty_cycle_percent: 0.0
+Threshold: threshold_600_mA
+  active_time_s: 0.0
+  duty_cycle_percent: 0.0
+
+=== TX Burst Detection ===
+num_bursts: 0
